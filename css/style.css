@@ -1,0 +1,739 @@
+/* =========================================================
+   A Story of Six Weeks — Teaching Practicum E-portfolio
+   Main stylesheet (shared by every page) — v3 editorial design
+   ========================================================= */
+
+/* ---------- 1. Fonts (stored in the /fonts folder, so they work offline) ---------- */
+@font-face { font-family: "Cormorant Garamond"; src: url("../fonts/cormorant-garamond-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Cormorant Garamond"; src: url("../fonts/cormorant-garamond-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Cormorant Garamond"; src: url("../fonts/cormorant-garamond-latin-500-italic.woff2") format("woff2"); font-weight: 500; font-style: italic; font-display: swap; }
+@font-face { font-family: "Cormorant Garamond"; src: url("../fonts/cormorant-garamond-latin-600-italic.woff2") format("woff2"); font-weight: 600; font-style: italic; font-display: swap; }
+@font-face { font-family: "Source Serif 4"; src: url("../fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Source Serif 4"; src: url("../fonts/source-serif-4-latin-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Source Serif 4"; src: url("../fonts/source-serif-4-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Source Serif 4"; src: url("../fonts/source-serif-4-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* ---------- 2. Colours, fonts & spacing (change these to restyle the whole site) ---------- */
+:root {
+  --ivory:      #f8f5f0;   /* page background */
+  --paper:      #fffdf9;   /* cards, boxes */
+  --ink:        #1f1c1d;   /* headings */
+  --text:       #322c2d;   /* body text */
+  --text-soft:  #6b6264;   /* captions, labels */
+  --plum:       #7b3a4b;   /* the one accent colour */
+  --plum-deep:  #4a1f2e;   /* home header panel, footer */
+  --blush:      #ecc9c1;   /* tiny highlights only */
+  --line:       #e4ddd5;   /* thin borders and rules */
+
+  --font-display: "Cormorant Garamond", Garamond, "Times New Roman", serif;
+  --font-text:    "Source Serif 4", Georgia, "Times New Roman", serif;
+
+  --s1: 8px;  --s2: 16px;  --s3: 24px;  --s4: 40px;  --s5: 64px;  --s6: 96px;
+
+  --measure: 700px;        /* width of the text column (~68 characters) */
+  --wide:    1000px;       /* width of photos that break out of the column */
+  --nav-h:   68px;
+
+  /* one gentle, consistent colour treatment for every photo (tones down the bright greens) */
+  --photo-filter: saturate(.86) sepia(.06) contrast(1.02);
+}
+
+/* ---------- 3. Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 16px); }
+
+body {
+  margin: 0;
+  background: var(--ivory);
+  color: var(--text);
+  font-family: var(--font-text);
+  font-size: 19px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: var(--plum); text-decoration: none; transition: color .2s, background-color .2s, border-color .2s; }
+a:hover { color: var(--plum-deep); }
+
+h1, h2, h3 {
+  text-wrap: balance;
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--ink);
+  letter-spacing: .005em;
+}
+
+:focus-visible { outline: 2px solid var(--plum); outline-offset: 3px; }
+
+.skip-link { position: absolute; left: -9999px; top: 0; background: var(--paper); padding: var(--s1) var(--s2); z-index: 300; }
+.skip-link:focus { left: 10px; top: 10px; }
+
+/* small uppercase label used in several places */
+.label {
+  font-family: var(--font-text);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+/* ---------- 4. Top navigation (sticky on every page) ---------- */
+.site-nav {
+  position: sticky; top: 0; z-index: 200;
+  background: rgba(248, 245, 240, .96);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: var(--nav-h);
+  padding: 0 var(--s3);
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s3);
+}
+.brand {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.brand:hover { color: var(--plum); }
+
+.site-nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: var(--s3); }
+.site-nav ul a {
+  display: block;
+  padding: 6px 0;
+  font-size: .74rem;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  border-bottom: 1px solid transparent;
+}
+.site-nav ul a:hover { color: var(--ink); }
+.site-nav ul a.active { color: var(--plum); border-bottom-color: var(--plum); }
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  font: 600 .72rem var(--font-text);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+
+/* reading progress bar along the bottom of the nav */
+.progress {
+  position: absolute; left: 0; bottom: -1px;
+  height: 2px; width: 0;
+  background: var(--plum);
+}
+
+/* ---------- 5. Home page header (split: text panel + photo) ---------- */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: min(calc(100vh - var(--nav-h)), 860px);
+  background: var(--plum-deep);
+  color: var(--ivory);
+}
+.hero-text {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: var(--s6) clamp(32px, 6vw, 96px);
+}
+.hero .label { color: var(--blush); margin: 0 0 var(--s4); }
+.hero .label span { opacity: .6; margin: 0 10px; }
+.hero h1 {
+  margin: 0;
+  font-size: clamp(3rem, 6.2vw, 5.6rem);
+  line-height: 1;
+  color: var(--ivory);
+}
+.hero .dates {
+  margin: var(--s3) 0 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.45rem;
+  color: var(--blush);
+}
+.hero .rule { width: 56px; height: 1px; background: var(--blush); opacity: .6; margin: var(--s5) 0 var(--s4); border: 0; }
+.hero .intro { margin: 0; font-style: italic; font-size: 1rem; opacity: .8; }
+.hero .name {
+  margin: 6px 0 var(--s1);
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 600;
+  line-height: 1.15;
+}
+.hero .affiliation { margin: 0; font-size: .92rem; opacity: .8; line-height: 1.6; }
+
+.hero-photo { position: relative; overflow: hidden; }
+.hero-photo img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 28%;
+  filter: var(--photo-filter);
+}
+
+/* ---------- 6. Inner page title band ---------- */
+.page-band {
+  text-align: center;
+  padding: var(--s6) var(--s3) var(--s5);
+  border-bottom: 1px solid var(--line);
+}
+.section-num {
+  margin: 0 0 var(--s2);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.3rem;
+  color: var(--plum);
+}
+.section-num::before,
+.section-num::after {
+  content: "";
+  display: inline-block;
+  width: 40px; height: 1px;
+  background: var(--plum);
+  opacity: .5;
+  vertical-align: middle;
+  margin: 0 14px;
+}
+.page-title { margin: 0; font-size: clamp(2.6rem, 6vw, 4.2rem); }
+
+/* ---------- 7. Main text column ---------- */
+.content {
+  max-width: calc(var(--measure) + 2 * var(--s3));
+  margin: 0 auto;
+  padding: var(--s5) var(--s3) var(--s6);
+}
+
+.content p { margin: 0 0 1.2em; }
+.content strong { font-weight: 600; color: var(--ink); }
+
+.section-title {
+  margin: var(--s6) 0 var(--s4);
+  font-size: clamp(2rem, 4.5vw, 2.7rem);
+  text-align: center;
+}
+.section-title::after {
+  content: "";
+  display: block;
+  width: 40px; height: 1px;
+  margin: var(--s3) auto 0;
+  background: var(--plum);
+}
+.content > .section-title:first-child { margin-top: 0; }
+
+.content h3 { font-size: 1.6rem; margin: var(--s5) 0 var(--s2); }
+
+hr.divider { border: 0; height: 1px; background: var(--line); margin: var(--s5) 0; }
+
+/* drop cap: large first letter at the start of an article */
+.dropcap::first-letter {
+  float: left;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 5.1em;
+  line-height: .78;
+  padding: 8px 12px 0 0;
+  color: var(--plum);
+}
+
+/* pull quote / opening quote */
+.pull {
+  margin: var(--s5) 0;
+  padding: var(--s4) var(--s2);
+  border-top: 1px solid var(--plum);
+  border-bottom: 1px solid var(--plum);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.6rem, 3.4vw, 2.1rem);
+  line-height: 1.3;
+  text-align: center;
+  color: var(--plum-deep);
+  text-wrap: balance;
+}
+.pull p { margin: 0; }
+
+/* standard (lining) numbers in the display font, so 10 doesn't look like "Io" */
+.score, .date, .dates, .section-num, .lesson-card .num, .page-title, .hero h1 { font-variant-numeric: lining-nums; }
+
+/* references */
+.references { margin-top: var(--s5); padding-top: var(--s4); border-top: 1px solid var(--line); }
+.references h3 { font-size: 1.35rem; margin: 0 0 var(--s2); }
+.references p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text);
+  padding-left: 2em;
+  text-indent: -2em;           /* APA hanging indent */
+  margin-bottom: 1.5em;
+}
+
+/* ---------- 8. Photos ---------- */
+/* Two shapes are used everywhere: 3:2 for wide photos, 4:5 for tall ones. */
+.content img { filter: var(--photo-filter); }
+
+figure { margin: var(--s5) 0; }
+figure img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  object-position: center 35%;
+  cursor: zoom-in;
+}
+figure.portrait img { max-width: 440px; margin: 0 auto; aspect-ratio: 4 / 5; object-position: center 30%; }
+
+/* photos that break out wider than the text column
+   (".content .wide" is used so this always wins over the slideshow/gallery spacing rules) */
+.content .wide {
+  width: min(var(--wide), calc(100vw - 2 * var(--s3)));
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+.photo-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s2);
+  margin: var(--s5) 0;
+}
+.photo-pair img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center 30%;
+  cursor: zoom-in;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s2);
+  margin: var(--s4) 0 var(--s5);
+}
+.gallery img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center 30%;
+  cursor: zoom-in;
+  transition: opacity .25s;
+}
+.gallery img:hover, .photo-pair img:hover, figure img:hover { opacity: .9; }
+
+/* ---------- 9. Slideshow (home page) ---------- */
+.slideshow {
+  position: relative;
+  margin: 0 0 var(--s5);
+  aspect-ratio: 16 / 9;
+  background: var(--ink);
+  overflow: hidden;
+}
+.slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.1s ease; }
+.slide.active { opacity: 1; }
+.slide img { width: 100%; height: 100%; object-fit: cover; object-position: center 35%; }
+.slide-caption {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 72px var(--s3) 40px;
+  background: linear-gradient(transparent, rgba(31, 18, 23, .72));
+  color: var(--ivory);
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.slide-caption span { display: block; margin-top: 6px; font-family: var(--font-text); font-size: .7rem; font-weight: 600; letter-spacing: .24em; color: var(--blush); }
+
+.slide-btn {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 44px; height: 44px;
+  border: 1px solid rgba(255,255,255,.7);
+  border-radius: 50%;
+  background: rgba(31, 18, 23, .25);
+  color: var(--ivory);
+  font-size: 1.3rem; line-height: 1;
+  cursor: pointer; z-index: 2;
+  opacity: 0;
+  transition: opacity .25s, background-color .2s;
+}
+.slideshow:hover .slide-btn, .slide-btn:focus-visible { opacity: 1; }
+.slide-btn:hover { background: rgba(31, 18, 23, .5); }
+.slide-btn.prev { left: var(--s3); }
+.slide-btn.next { right: var(--s3); }
+
+.slide-dots { position: absolute; bottom: 16px; left: 0; right: 0; display: flex; justify-content: center; gap: var(--s1); z-index: 2; }
+.slide-dots button { width: 20px; height: 2px; padding: 0; border: 0; background: rgba(255,255,255,.45); cursor: pointer; transition: background-color .2s, width .2s; }
+.slide-dots button.active { background: var(--ivory); width: 32px; }
+
+/* ---------- 10. YouTube video ---------- */
+.video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  margin: 0 0 var(--s5);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video-placeholder {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  color: var(--text-soft); text-align: center; padding: var(--s3);
+}
+.video-placeholder p { margin: 0; font-size: .72rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
+.video-placeholder .play { width: 68px; height: 68px; border: 1px solid var(--plum); border-radius: 50%; position: relative; margin-bottom: var(--s2); }
+.video-placeholder .play::after {
+  content: ""; position: absolute; left: 27px; top: 22px;
+  border-left: 18px solid var(--plum);
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+}
+
+/* ---------- 11. Observation scores ---------- */
+.score-cards { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3); margin: var(--s5) 0; }
+.score-card { background: var(--paper); border: 1px solid var(--line); padding: var(--s4) var(--s3) var(--s3); text-align: center; }
+.score-card .label { color: var(--text-soft); }
+.score-card .date  { font-family: var(--font-display); font-style: italic; font-weight: 500; font-size: 1.3rem; margin: 4px 0 var(--s2); }
+.score-card .score { font-family: var(--font-display); font-size: 3.4rem; font-weight: 600; line-height: 1; color: var(--ink); }
+.score-card.better .score { color: var(--plum); }
+.score-bar { height: 3px; background: var(--line); margin-top: var(--s3); }
+.score-bar span { display: block; height: 100%; background: var(--text-soft); }
+.score-card.better .score-bar span { background: var(--plum); }
+
+/* ---------- 12. Lesson plans ---------- */
+.lesson-list { display: grid; gap: var(--s2); margin: var(--s4) 0; }
+.lesson-card {
+  display: flex; gap: var(--s3); align-items: center;
+  padding: var(--s3);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  transition: border-color .2s;
+}
+.lesson-card:hover { border-color: var(--plum); }
+.lesson-card .num { flex: 0 0 auto; width: 48px; text-align: center; font-family: var(--font-display); font-style: italic; font-weight: 500; font-size: 2.2rem; line-height: 1; color: var(--plum); }
+.lesson-card h3 { margin: 0 0 2px; font-size: 1.4rem; }
+.lesson-card p  { margin: 0; font-size: .9rem; color: var(--text-soft); }
+.lesson-card .btn { margin-left: auto; flex: 0 0 auto; }
+
+/* outlined button */
+.btn {
+  display: inline-block;
+  padding: 10px 22px;
+  border: 1px solid var(--plum);
+  color: var(--plum);
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.btn:hover { background: var(--plum); color: var(--ivory); }
+
+/* ---------- 13. Testimonials ---------- */
+.testimonial {
+  margin: 0;
+  padding: var(--s5) 0;
+  border-bottom: 1px solid var(--line);
+  text-align: center;
+}
+.testimonial::before {
+  content: "\201C";
+  display: block;
+  font-family: var(--font-display);
+  font-size: 5rem;
+  line-height: .6;
+  height: 40px;
+  color: var(--plum);
+  opacity: .35;
+}
+
+.testimonial p {
+  text-wrap: balance;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.6rem;
+  line-height: 1.4;
+  color: var(--ink);
+}
+.testimonial footer {
+  font-variant: small-caps;
+  font-weight: 600;
+  letter-spacing: .08em;
+  font-size: 1.05rem;
+  color: var(--plum);
+}
+.testimonial footer span { display: block; font-variant: normal; font-weight: 400; letter-spacing: 0; font-size: .88rem; color: var(--text-soft); }
+.testimonial img { margin: var(--s3) auto 0; border: 1px solid var(--line); cursor: zoom-in; }
+
+/* "to be added" note on unfinished pages */
+.note { padding: 14px 18px; background: #fbf3dc; border-left: 2px solid #c9962c; font-size: .92rem; }
+
+/* ---------- 14. Previous / next links ---------- */
+.pager {
+  display: flex; justify-content: space-between; gap: var(--s2);
+  margin-top: var(--s6);
+  padding-top: var(--s4);
+  border-top: 1px solid var(--line);
+}
+.pager a { display: flex; flex-direction: column; max-width: 48%; }
+.pager .next { margin-left: auto; text-align: right; }
+.pager small { font-size: .7rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--text-soft); }
+.pager span { font-family: var(--font-display); font-size: 1.6rem; font-weight: 600; color: var(--ink); line-height: 1.2; margin-top: 4px; }
+.pager a:hover span { color: var(--plum); }
+
+/* ---------- 15. Footer ---------- */
+.site-footer { background: var(--plum-deep); color: rgba(248,245,240,.7); text-align: center; padding: var(--s5) var(--s3); font-size: .88rem; }
+.footer-title { margin: 0 0 var(--s3); font-family: var(--font-display); font-size: 1.8rem; font-weight: 600; color: var(--ivory); }
+.footer-nav ul { list-style: none; margin: 0 0 var(--s4); padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px var(--s4); }
+.footer-nav a { color: rgba(248,245,240,.85); font-size: .7rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; }
+.footer-nav a:hover, .footer-nav a.active { color: var(--blush); }
+.site-footer p { margin: 4px 0; }
+
+/* ---------- 16. Back-to-top button ---------- */
+.to-top {
+  position: fixed; right: 24px; bottom: 24px; z-index: 150;
+  width: 46px; height: 46px;
+  border: 1px solid var(--plum); border-radius: 50%;
+  background: var(--ivory); color: var(--plum);
+  font-size: 1.1rem; cursor: pointer;
+  opacity: 0; visibility: hidden;
+  transition: opacity .3s, visibility .3s, background-color .2s, color .2s;
+}
+.to-top.show { opacity: 1; visibility: visible; }
+.to-top:hover { background: var(--plum); color: var(--ivory); }
+
+/* ---------- 17. Lightbox ---------- */
+.lightbox { position: fixed; inset: 0; background: rgba(24, 14, 18, .95); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 30px; cursor: zoom-out; }
+.lightbox.open { display: flex; }
+.lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.lightbox-close { position: absolute; top: 14px; right: 20px; background: none; border: 0; color: var(--ivory); font-size: 2.2rem; cursor: pointer; }
+
+/* ---------- 18. Tablets ---------- */
+@media (max-width: 960px) {
+  .site-nav ul { gap: var(--s2); }
+  .site-nav ul a { letter-spacing: .1em; }
+  .brand { font-size: 1.3rem; }
+}
+
+/* ---------- 19. Phones ---------- */
+@media (max-width: 760px) {
+  body { font-size: 17.5px; }
+  :root { --nav-h: 60px; }
+
+  .menu-toggle { display: inline-block; }
+  .site-nav nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--ivory); border-bottom: 1px solid var(--line); }
+  .site-nav.open nav { display: block; }
+  .site-nav ul { flex-direction: column; gap: 0; padding: var(--s1) var(--s3) var(--s2); }
+  .site-nav ul a { padding: 12px 0; font-size: .8rem; border-bottom: 1px solid var(--line); }
+  .site-nav ul a.active { border-bottom-color: var(--line); }
+
+  .hero { grid-template-columns: 1fr; min-height: 0; }
+  .hero-text { padding: var(--s5) var(--s3); }
+  .hero .label { margin-bottom: var(--s3); }
+  .hero .label span { display: block; height: 0; overflow: hidden; margin: 0; }
+  .hero .rule { margin: var(--s4) 0 var(--s3); }
+  .hero-photo { height: 62vh; }
+
+  .page-band { padding: var(--s5) var(--s3) var(--s4); }
+  .content { padding: var(--s4) 20px var(--s5); }
+  .section-title { margin-top: var(--s5); }
+  .content .wide { width: calc(100vw - 2 * 12px); }
+  .gallery { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .photo-pair { gap: 10px; }
+  .score-cards { grid-template-columns: 1fr; }
+  .lesson-card { flex-wrap: wrap; gap: var(--s2); }
+  .lesson-card .btn { margin-left: 72px; }
+  .slideshow.fit .slide img { padding: 10px 10px 34px; }
+  .slide-btn { opacity: 1; width: 36px; height: 36px; font-size: 1.1rem; }
+  .slide-btn.prev { left: 10px; } .slide-btn.next { right: 10px; }
+  .slide-caption { font-size: 1.25rem; padding-bottom: 32px; }
+  .testimonial p { font-size: 1.35rem; }
+  .pager span { font-size: 1.25rem; }
+  .to-top { right: 14px; bottom: 14px; }
+}
+
+/* ---------- 20. Print / Save as PDF ---------- */
+@media print {
+  @page { margin: 18mm 16mm; }
+  body { background: #fff; color: #000; font-size: 11pt; line-height: 1.55; }
+  .site-nav, .menu-toggle, .to-top, .lightbox, .slide-btn, .slide-dots,
+  .pager, .footer-nav, .video, .note, .skip-link { display: none !important; }
+
+  .hero { display: block; background: #fff; color: #000; min-height: 0; }
+  .hero-text { padding: 0 0 12pt; }
+  .hero h1, .hero .name { color: #000; }
+  .hero .label, .hero .dates { color: #555; }
+  .hero .rule { background: #999; margin: 12pt 0; }
+  .hero-photo { height: 9cm; }
+
+  .page-band { padding: 0 0 12pt; }
+  .content { max-width: none; padding: 12pt 0 0; }
+  .content .wide { width: 100%; margin-left: 0; transform: none; }
+
+  .slideshow { aspect-ratio: auto; background: none; }
+  .slide { position: static; opacity: 1; display: none; }
+  .slide:first-child { display: block; }
+  .slide img { height: auto; }
+  .slide-caption { position: static; background: none; color: #555; padding: 4pt 0 0; font-size: 11pt; }
+
+  figure, .photo-pair, .gallery, .pull, .score-cards, .testimonial, .lesson-card { break-inside: avoid; }
+  /* shorter photos on paper so pages don't end up half empty */
+  figure, .photo-pair, .gallery { margin: 10pt 0; }
+  .photo-pair img { aspect-ratio: 3 / 2; }
+  .gallery { grid-template-columns: repeat(3, 1fr); gap: 6pt; }
+  .gallery img { aspect-ratio: 1; }
+  figure img { max-height: 7.5cm; }
+  figure.portrait img { max-width: 6cm; }
+  .pull { margin: 14pt 0; padding: 10pt 0; font-size: 15pt; }
+  h1, h2, h3 { break-after: avoid; color: #000; }
+  .content img, .hero-photo img { filter: none; }
+  a { color: #000; }
+  .site-footer { background: none; color: #555; padding: 12pt 0 0; border-top: 1px solid #ccc; }
+  .footer-title { color: #000; font-size: 13pt; }
+}
+
+
+/* =========================================================
+   21–24. Additions for photo rows, downloads and lesson plans
+   ========================================================= */
+
+/* ---------- 21. Longer site title: slightly smaller headline + brand ---------- */
+.hero h1 { font-size: clamp(2.6rem, 4.6vw, 4.3rem); line-height: 1.04; }
+@media (max-width: 1120px) {
+  .brand { font-size: 1.25rem; }
+  .site-nav ul { gap: var(--s2); }
+  .site-nav ul a { letter-spacing: .1em; }
+}
+
+/* home gallery with four photos per row */
+.gallery.four { grid-template-columns: repeat(4, 1fr); }
+
+/* ---------- 22. Photo rows ----------
+   Each photo keeps its natural shape. Photos in one row share the same height.
+   (--ar is the photo's width ÷ height, set on each <img> in the HTML.) */
+.photo-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s2);
+  margin: var(--s5) 0;
+}
+.photo-row img {
+  flex: var(--ar) 1 0;
+  width: 0;
+  min-width: 0;
+  aspect-ratio: var(--ar);
+  object-fit: cover;
+  cursor: zoom-in;
+  transition: opacity .25s;
+}
+.photo-row img:hover { opacity: .9; }
+.photo-row + .photo-row { margin-top: calc(var(--s2) - var(--s5)); }
+
+/* ---------- 23. Download cards (observation forms, testimonials) ---------- */
+.intro-line { text-align: center; color: var(--text-soft); }
+.downloads { display: grid; gap: var(--s2); margin: var(--s4) 0 var(--s5); }
+.download-card {
+  display: flex; align-items: center; gap: var(--s3);
+  padding: var(--s3);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  transition: border-color .2s;
+}
+.download-card:hover { border-color: var(--plum); }
+.file-icon {
+  flex: 0 0 auto;
+  width: 44px; height: 56px;
+  border: 1px solid var(--plum);
+  display: flex; align-items: flex-end; justify-content: center;
+  padding-bottom: 8px;
+  font-size: .62rem; font-weight: 700; letter-spacing: .12em;
+  color: var(--plum);
+  position: relative;
+}
+.file-icon::before {                     /* folded corner */
+  content: ""; position: absolute; top: -1px; right: -1px;
+  border-style: solid; border-width: 0 12px 12px 0;
+  border-color: var(--ivory) var(--ivory) var(--plum) var(--plum);
+}
+.download-card > div:not(.file-icon) { flex: 1 1 0; min-width: 0; }
+.download-card h3 { margin: 0 0 2px; font-size: 1.45rem; }
+.download-card .meta { margin: 0; font-size: .85rem; color: var(--text-soft); }
+.download-card .btn { margin-left: auto; flex: 0 0 auto; }
+
+/* ---------- 24. Slideshow that shows whole photos (lesson materials) ----------
+   Photos are shown complete (not cropped) on a soft paper background. */
+.slideshow.fit { aspect-ratio: 4 / 3; background: #ece5dc; margin-top: var(--s5); }
+.slideshow.fit .slide img { object-fit: contain; padding: var(--s3) var(--s3) 44px; }
+.slideshow.fit .slide-btn { opacity: 1; background: rgba(31, 18, 23, .55); }
+.slideshow.fit .slide-dots button { background: rgba(74, 31, 46, .3); }
+.slideshow.fit .slide-dots button.active { background: var(--plum); }
+
+/* ---------- Phones ---------- */
+@media (max-width: 760px) {
+  .photo-row { gap: 10px; flex-wrap: wrap; }
+  .photo-row + .photo-row { margin-top: calc(10px - var(--s5)); }
+  /* rows of three or four photos become two per line */
+  .photo-row.many img { flex: 1 1 calc(50% - 5px); width: auto; aspect-ratio: 4 / 5; object-position: center 30%; }
+  .photo-row.many img:last-child:nth-child(odd) { flex-basis: 100%; aspect-ratio: 3 / 2; }
+
+  .brand { font-size: 1.12rem; }
+  .gallery.four { grid-template-columns: repeat(2, 1fr); }
+  .download-card { flex-wrap: wrap; gap: var(--s2); }
+  .download-card .btn { margin-left: 68px; }
+}
+
+/* ---------- Print ---------- */
+@media print {
+  .photo-row { margin: 10pt 0; break-inside: avoid; }
+  .download-card { break-inside: avoid; }
+  .slideshow.fit { aspect-ratio: auto; }
+  .slideshow.fit .slide img { padding: 0; max-height: 9cm; }
+  .btn { border: 0; padding: 0; }
+}
+
+/* ---------- Phones: lesson plan list and lesson materials slideshow ---------- */
+@media (max-width: 760px) {
+  .lesson-card { flex-wrap: nowrap; gap: 14px; padding: var(--s2); }
+  .lesson-card > div:not(.num) { flex: 1 1 0; min-width: 0; }
+  .lesson-card .num { width: 36px; font-size: 1.8rem; }
+  .lesson-card .btn { margin-left: auto; padding: 9px 14px; }
+  .slideshow.fit { aspect-ratio: 4 / 5; }
+}
+
+
+/* ---------- 25. Blurred background behind slideshow photos ---------- */
+.slideshow.fit .slide-bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  padding: 0 !important;
+  object-fit: cover;
+  filter: blur(24px) saturate(.9);
+  transform: scale(1.2);          /* hides the soft blurred edges */
+  opacity: .8;
+}
+.slideshow.fit .slide img:not(.slide-bg) { position: relative; z-index: 1; }
+
+/* ---------- 26. Vertical video (YouTube Shorts) ---------- */
+.video.short {
+  aspect-ratio: 9 / 16;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto var(--s5);
+  background: var(--ink);
+}
